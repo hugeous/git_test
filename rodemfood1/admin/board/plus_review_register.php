@@ -9,7 +9,7 @@
     </div>
     <div class="table-title gd-help-manual">플러스리뷰 게시글 수정</div>
 
-
+asdf
     <table class="table table-cols">
         <colgroup>
             <col class="width-md"/>
@@ -35,7 +35,7 @@
             </td>
         </tr>
 		//-->
-		
+
         <tr>
             <th>상품정보</th>
             <td colspan="3">
