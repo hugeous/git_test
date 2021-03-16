@@ -1,0 +1,86 @@
+<script type="text/javascript">
+    <!--
+    $(document).ready(function(){
+
+        // $("#displayTimeSale").hide();
+        gd_dailyMissionTimer('{=timeSaleDuration}');
+        
+        <!--{ ? timeSaleInfo }-->
+                $('.dev_timesale_main').removeClass('dn');
+        <!--{ / }-->
+
+    });
+
+    /**
+     * 시간간격 카운트
+     * @returns {String}
+     */
+    function gd_dailyMissionTimer(duration) {
+
+        if (duration == 0) {
+            $('.dev_timesale_on').addClass('dn');
+            $('.dev_timesale_off').removeClass('dn');
+            return;
+        } else {
+            $('.dev_timesale_on').removeClass('dn');
+            $('.dev_timesale_off').addClass('dn');
+        }
+
+        var timer = duration;
+        var days,hours, minutes, seconds;
+
+        var interval = setInterval(function(){
+            days	= parseInt(timer / 86400, 10);
+            hours	= parseInt(((timer % 86400 ) / 3600), 10);
+            minutes = parseInt(((timer % 3600 ) / 60), 10);
+            seconds = parseInt(timer % 60, 10);
+
+            if(days <= 0) {
+                $('.time_day_view').hide();
+            } else {
+
+                // $('#timeViewDay').html("");
+                $('.dev_timesale_day').html("");
+
+                days 	= days < 10 ? "0" + days : days;
+                for(i = 0; i < days.toString().length; i++) {
+                    // $('#timeViewDay').append("<strong class='time_day_view'>"+days.toString().substr(i,1)+"</strong>");
+                    $('.dev_timesale_day').append("<span class=\"numcon numcon"+(i+1)+"\"><b>"+days.toString().substr(i,1)+"</b></span>");
+                }
+                // $('.time_day_view_tail').text("{=__('일')}");
+                $('.dev_timesale_day').append("<span class=\"numtxt numtxt1\"><b>일</b></span>");
+            }
+
+            hours 	= hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            // $('#timeViewTime strong').eq(0).text(hours.toString().substr(0,1));
+            // $('#timeViewTime strong').eq(1).text(hours.toString().substr(1,1));
+            //
+            // $('#timeViewTime strong').eq(2).text(minutes.toString().substr(0,1));
+            // $('#timeViewTime strong').eq(3).text(minutes.toString().substr(1,1));
+            //
+            // $('#timeViewTime strong').eq(4).text(seconds.toString().substr(0,1));
+            // $('#timeViewTime strong').eq(5).text(seconds.toString().substr(1,1));
+
+            $('.numcon.numcon3 b').text(hours.toString().substr(0,1));
+            $('.numcon.numcon4 b').text(hours.toString().substr(1,1));
+
+            $('.numcon.numcon5 b').text(minutes.toString().substr(0,1));
+            $('.numcon.numcon6 b').text(minutes.toString().substr(1,1));
+
+            $('.numcon.numcon7 b').text(seconds.toString().substr(0,1));
+            $('.numcon.numcon8 b').text(seconds.toString().substr(1,1));
+
+            $("#displayTimeSale").show();
+
+            if (--timer < 0) {
+                timer = 0;
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+
+    //-->
+</script>

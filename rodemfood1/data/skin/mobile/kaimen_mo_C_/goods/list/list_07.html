@@ -1,0 +1,140 @@
+{*** 탭+상품이동형 | goods/list/list_07.html ***}
+<li class="goods_prd_item7 js_tab_view{mainData.sno}">
+	<!--{ ? goodsList }-->
+	<div class="tab_box">
+		<ul class="tab">
+			<!--{ @ tabConfig.title }-->
+			<li class="<!--{ ? .index_ == '0'}--> on<!--{ / }-->"><a data-key="{.index_ }">{.value_}</a></li>
+			<!--{ / }-->
+		</ul>
+	</div>
+	<!--{ @ goodsList }-->
+	<ul class="mainTabGoodsList{.index_ }" <!--{ ? .index_ > 0}-->style="display:none"<!--{ / }--> >
+	<!--{ @ .value_}-->
+	<!--{ @ ..value_}-->
+		<li class="goods_gallery_item" style="width:{=(100/themeInfo.lineCnt)}%;">
+			<div class="goods_prd_item7_box">
+				<div class="goods_prd_img">
+					<div class="img_box">
+						<a href="{=gd_goods_url(...goodsUrl, ...goodsNo, 1)}" target="<!--{ ? themeInfo.relationLinkFl == 'blank' }-->_blank<!--{ : }-->_self<!--{ / }-->">
+							<!--{ ? in_array('img',themeInfo.displayField) && gd_isset(...goodsImage) }--><div class="img">{...goodsImage}</div><!--{ / }-->
+							<!--{ ? themeInfo.soldOutIconFl == 'y'  && ...soldOut =='y' &&  soldoutDisplay.soldout_overlay != '0' }-->
+							<span class="soldout_img" title="{=__('품절상품입니다.')}" style="background-image:url('{soldoutDisplay.soldout_overlay_img}');">{=__('품절')}</span>
+							<!--{ / }-->
+							<!--{ ? ..timeSaleFl }-->
+							<span class="timesale_img"><img src="../../img/icon/icon_timesale.png" alt="{=__('타임세일')}">{=__('타임세일')}</span>
+							<!--{ / }-->
+							<!--{ ? in_array('coupon',themeInfo.displayField) && ...couponPrice != '' }-->
+							<span class="coupon_img" <!--{ ? !in_array('img',themeInfo.displayField) && gd_isset(...goodsImage) }-->style="right:initial;" <!--{ / }-->>
+								<img src="../../img/icon/icon_coupon_img.png" alt="{=__('타임세일')}">
+							</span>
+							<!--{ / }-->
+						</a>
+					</div>
+				</div>
+				<!--{ ? in_array('goodsColor',themeInfo.displayField) }-->
+				{...goodsColor}
+				<!--{ / }-->
+				<div class="goods_prd_content">
+					<div class="goods_list_info">
+						<a href="{=gd_goods_url(...goodsUrl, ...goodsNo, 1)}" target="<!--{ ? themeInfo.relationLinkFl == 'blank' }-->_blank<!--{ : }-->_self<!--{ / }-->">
+						<!--{ ? themeInfo.iconFl == 'y' }-->
+						<div class="goods_prd_icon">{...goodsIcon}</div>
+						<!--{ / }-->
+						<!--{ ? themeInfo.soldOutIconFl == 'y'  && ...soldOut =='y' && soldoutDisplay.soldout_icon != 'disable' }-->
+						<div class="goods_prd_soldout"><img src="{soldoutDisplay.soldout_icon_img}"></div>
+						<!--{ / }-->
+							<ul class="goods_info_list">
+								<!--{ ? in_array('brandCd',themeInfo.displayField) && gd_isset(...brandNm) }-->
+								<li class="brand_name">{...brandNm}</li>
+								<!--{ / }-->
+								<!--{ ? in_array('makerNm',themeInfo.displayField) && gd_isset(...makerNm) }-->
+								<li class="maker_name">{...makerNm}</li>
+								<!--{ / }-->
+								<!--{ ? in_array('goodsNm',themeInfo.displayField) && gd_isset(...goodsNm) }-->
+								<li class="prd_name">{...goodsNm}</li>
+								<!--{ / }-->
+								<!--{ ? in_array('shortDescription',themeInfo.displayField) && gd_isset(...shortDescription) }-->
+								<li class="short_des">{...shortDescription}</li>
+								<!--{ / }-->
+								<!--{ ? in_array('fixedPrice',themeInfo.displayField) && gd_isset(...fixedPrice) && ...fixedPrice > 0 && ...goodsPriceDisplayFl =='y'}-->
+								<li class="fixed_price">
+									{=gd_global_currency_symbol()}{=gd_global_money_format(...fixedPrice)}{=gd_global_currency_string()}
+									<span class='add_currency'>{=gd_global_add_currency_display(...fixedPrice)}</span>
+								</li>
+								<!--{ / }-->
+								<!--{ ? in_array('goodsPrice',themeInfo.displayField) && gd_isset(...goodsPrice) }-->
+								<li class="price">
+									<span <!--{ ? !(in_array('coupon',themeInfo.displayField) && ...couponPrice != '') }-->class="c_price"<!--{ / }-->>
+										<!--{ ? themeInfo.soldOutIconFl == 'y'  && ...soldOut =='y' && soldoutDisplay.soldout_price == 'text'}-->
+										{=soldoutDisplay.soldout_price_text}
+										<!--{ : themeInfo.soldOutIconFl == 'y'  && ...soldOut =='y' && soldoutDisplay.soldout_price == 'custom'}-->
+										<img src="{soldoutDisplay.soldout_price_img}">
+										<!--{ : }-->
+										<!--{ ? ...goodsPriceString !='' }-->
+										{..goodsPriceString}
+										<!--{ : }-->
+										<!--{ ? ...timeSaleFl && ...timeSaleGoodsPriceViewFl =='y' && ...goodsPriceDisplayFl =='y'}-->
+										<span class="ori_price"> {=gd_global_currency_symbol()}{=gd_global_money_format(...oriGoodsPrice)}{=gd_global_currency_string()} <span class='add_currency'>{=gd_global_add_currency_display(...oriGoodsPrice)}</span></span><br/>
+										{=gd_global_currency_symbol()}{=gd_global_money_format(...goodsPrice)}</em>{=gd_global_currency_string()} <i class="i_time_icon"></i>
+										<!--{ : }-->
+										{=gd_global_currency_symbol()}{=gd_global_money_format(...goodsPrice)}</em>{=gd_global_currency_string()}
+										<!--{ / }-->
+										<span class='add_currency'>{=gd_global_add_currency_display(...goodsPrice)}</span>
+										<!--{ / }-->
+										<!--{ / }-->
+									</span>
+								</li>
+								<!--{ / }-->
+								<!--{ ? in_array('coupon',themeInfo.displayField) && ...couponPrice != '' && ...goodsPriceDisplayFl =='y'}-->
+								<li class="coupon_price">
+									{=__('쿠폰가')} :
+									<span class="coupon_price1">
+										{=gd_global_currency_symbol()}{=gd_global_money_format(...couponPrice)}{=gd_global_currency_string()}
+										<span class='add_currency'>{=gd_global_add_currency_display(...couponPrice)}</span>
+									</span>
+								</li>
+								<!--{ / }-->
+								<!--{ ? in_array('goodsDcPrice',themeInfo.displayField) && gd_isset(...goodsDcPrice) && ...goodsPriceDisplayFl =='y'}-->
+								<li class="dc_price">{=__('상품할인')} : {=gd_global_money_format(...goodsDcPrice)} {=gd_global_currency_string()}</li>
+								<!--{ / }-->
+								<!--{ ? in_array('mileage',themeInfo.displayField) && gd_isset(...mileageBasic) && ...goodsPriceDisplayFl =='y'}-->
+								<li class="list_mileage">{=mileageData['name']} :  {...mileageBasic} {=mileageData['unit']}</li>
+								<!--{ / }-->
+								<!--{ ? in_array('goodsModelNo',themeInfo.displayField) && gd_isset(...goodsModelNo)  }-->
+								<li class="model_no">{=__('모델번호')} : {...goodsModelNo}</li>
+								<!--{ / }-->
+								<!--{ ? in_array('goodsNo',themeInfo.displayField) && gd_isset(...goodsNo) }-->
+								<li class="prd_code">{=__('상품코드')} : {...goodsNo}</li>
+								<!--{ / }-->
+							</ul>
+						</a>
+					</div>
+				</div>
+			</div>
+		</li>
+	<!--{ / }-->
+	<!--{ / }-->
+	</ul>
+	<!--{ / }-->
+	<!--{ : }-->
+	<div class="no_bx"><p><strong>{=__('상품이 존재하지 않습니다.')}</strong></p></div>
+	<!--{ / }-->
+</li>
+
+<script type="text/javascript">
+    // DOM 로드
+    $(document).ready(function () {
+        $(".js_tab_view{mainData.sno} .tab a").click(function (e) {
+            $(".js_tab_view{mainData.sno} .tab li").removeClass('on');
+            $(this).parent().addClass('on');
+
+            $(".js_tab_view{mainData.sno} ul[class*='mainTabGoodsList']").hide();
+            $(".js_tab_view{mainData.sno} .mainTabGoodsList"+$(this).data('key')).show();
+            <!--{ ? imageLazyFl == 'y' }-->
+            $(".js-tab-view{mainData.sno} .mainTabGoodsList"+$(this).data('key')+" img.gd_image_lazy").lazyload();
+            <!--{ / }-->
+        });
+    });
+</script>
+

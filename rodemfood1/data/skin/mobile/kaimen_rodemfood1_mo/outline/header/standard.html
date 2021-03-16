@@ -1,0 +1,286 @@
+{*** 상단 기본파일 | main/index.php ***}
+<div id="header_wrap">
+	<header>
+
+<div style="text-align:center; margin-top:10px; border-bottom:#a8ca50 1px solid">
+<table border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr align="center">
+    <td>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr style=" font-size:14px;" height="">
+    <td width="90"><a href="/main/html.php?htmid=service/company_greeting.html" target="_blank">로뎀푸드Story</a></td>
+    <td><a href="http://m.rdf114.com" target="_blank">Ι 업소몰</a></td>
+    <td>&nbsp;</td>
+	  <td align="right"><table border="0" cellpadding="0" cellspacing="0">
+							<tr height="30px">
+								<!--{ ? gd_is_login() === false }-->
+								<td style="padding-right:10px;"><a href="../member/login.php">{=__('로그인')}</td>
+								<td>Ι <a href="../member/join_method.php">{=__('회원가입')}</td>
+								<!--{ : }-->
+
+								<td style="padding-right:10px;"><a href="../member/logout.php">{=__('로그아웃')}</td>
+								<td>Ι <a href="../mypage/index.php">{=__('마이페이지')}</td>
+								<!--{ / }-->
+							</tr>
+						</table></td>
+  </tr>
+</table>
+</td>
+  </tr>
+  <tr align="center">
+    <td><table border="0" cellpadding="0" cellspacing="0">
+
+   <td><a href="#" class="side_menu"><span><img src="/data/skin/mobile/kaimen_rodemfood1_mo/img/m_btn/menu.jpg" /></span></a></td>
+       <td style="padding-right:14px;"><button class="top_search bn_srch"><span>{=__('검색')}</span></button></td>
+    <td><a href="http://rodemfoodshop.com/" ><img src="/data/skin/mobile/kaimen_rodemfood1_mo/img/m_btn/logo.jpg" width="161" height="29" /></a></td>
+    <td style="padding-left:33px;"><a href="../order/cart.php" target="_parent" alt="장바구니"><img src="/data/skin/mobile/kaimen_rodemfood1_mo/img/m_btn/cart.jpg" /></a></td>
+    <td width="26"></td>
+  </tr>
+</table></td>
+  </tr>
+</table>
+</div>
+
+<!-- 타임세일 20200625 Start -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.2/js/swiper.js" ></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.2/css/swiper.css">
+
+ <!-- Swiper -->
+<div class="ts_single dev_timesale_on">
+			<div class="pc_ts_bn_all">
+				<div class="pc_ts_bn_in">
+					<div class="pc_tx_bn_Bx">
+						<div class="pc_tx_bn_Bx_top"  onclick="window.open('/event/time_sale.php?sno=5')" style="cursor:pointer;">
+							<p class="time_tit"><a href="/event/time_sale.php?sno=5"><span class="time_font">타임</span><i class="ts_icon"></i><span class="sale_font">특가</span></a></p>
+							<div class="ts_numbers">
+	                            <span class="dev_timesale_day">
+	    							<span class="numcon numcon1"><b>0</b></span>
+	    							<span class="numcon numcon2"><b>0</b></span>
+	                                <span class="numtxt numtxt1"><b>일</b></span>
+	                            </span>
+								<span class="numcon numcon3"><b>0</b></span>
+								<span class="numcon numcon4"><b>0</b></span>
+								<span class="numtxt numtxt2"><b>:</b></span>
+								<span class="numcon numcon5"><b>0</b></span>
+								<span class="numcon numcon6"><b>0</b></span>
+								<span class="numtxt numtxt3"><b>:</b></span>
+								<span class="numcon numcon7"><b>0</b></span>
+								<span class="numcon numcon8"><b>0</b></span>
+							</div>
+						</div>
+						<div class="ps_ts_bncon">
+							<div class="swiper-container-ts ts_slider_new">
+								<div class="swiper-wrapper">
+									<!--{ @dataBanner('2000640197') }--><div class="swiper-slide">{.tag}</div><!--{ / }-->
+								 </div>
+							</div>
+						 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+  <script>
+    var TSswiper = new Swiper('.swiper-container-ts' , {
+			loop:true,
+      autoplay: {
+		speed: 300,
+
+      },
+    });
+
+  </script>
+<!-- 타임세일 20200625 End -->
+
+
+
+<!-- 네비게이터 -->
+			<div class="global_nav_wrap">
+				<div class="global_nav">
+					<ul class="list">
+						<li <!--{ ? gCurrentPageName == 'service/deal100won' }-->class="active"<!--{/}-->><a href="/service/deal100won.php">100원 구매</a></li>
+						<li <!--{ ? cateCd == '001' }-->class="active"<!--{/}-->><a href="/goods/goods_list.php?cateCd=001"><span>죽&스프</span></a></li>
+						<li <!--{ ? cateCd == '002' }-->class="active"<!--{/}-->><a href="/goods/goods_list.php?cateCd=002"><span>찰바&마리</span></a></li>
+						<li <!--{ ? cateCd == '003' }-->class="active"<!--{/}-->><a href="/goods/goods_list.php?cateCd=003"><span>떡볶이&잡채</span></a></li>
+						<li <!--{ ? cateCd == '004' }-->class="active"<!--{/}-->><a href="/goods/goods_list.php?cateCd=004"><span>빙수&떡</span></a></li>
+					</ul><!-- .global_location_menu -->
+				</div><!-- .global_location_menu_wrap -->
+			</div>
+			<!--{ ? gCurrentPageName != 'main/index' }-->
+			<div class="top_cat">
+				<ul>
+					<li><a href="/goods/goods_list.php?cateCd=006">베스트상품</a></li>
+					<li><a href="/goods/goods_list.php?cateCd=007">할인상품</a></li>
+					<li><a href="/goods/goods_list.php?cateCd=005">세트상품</a></li>
+					<li><a href="/board/list.php?bdId=event">이벤트/혜택</a></li>
+					<li><a href="/board/plus_review_article.php">구매후기</a></li>
+				</ul>
+			</div>
+			<!--{ / }-->
+
+			<!--{ ? (layout.current_page == 'y' && layout.page_name) || gCurrentPageName == 'goods/goods_view' }-->
+			<div class="navi_g">
+				<ul>
+					<li>{=__('홈')}</li>
+					<!--{ ? gCurrentPageName == 'goods/goods_list' }-->
+					<li>{=dataCategoryPosition(cateCd,'</li>
+					<li>',cateType)}</li>
+					<!--{ : }-->
+					<li>{=layout.page_name}</li>
+					<!--{ / }-->
+				</ul>
+			</div>
+			<!--{ / }-->
+			<!--{ ? gCurrentPageName != 'main/index' }-->
+			<div class="sub_top">
+				<div class="sub_top_left">
+					<!--{ ? gReturnUrl }-->
+					<a href="{=gReturnUrl}" class="all_page_prev">{=__('이전')}</a>
+					<!--{ : }-->
+					<a href="{=gReferer}" class="all_page_prev js_bn_back">{=__('이전')}</a>
+					<!--{ / }-->
+				</div>
+				<h2><a href="#" class="js_page_reload "><!--{ ? gPageName }-->{=gPageName}<!--{:}-->{=layout.page_name}<!--{/}--></a></h2>
+				<!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
+				<div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
+				<!--{ / }-->
+				<!--{ ? gCurrentPageName == 'board/view' }-->
+				<div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
+				<!--{ / }-->
+			</div>
+			<!--{ / }-->
+		</div>
+	</header>
+</div>
+<!-- //header_wrap -->
+<nav>
+	<div class="bg"></div>
+	<div class="left_close"></div>
+	<div class="nav_bg_box">
+		<div class="nav_box">
+			<div class="nav_iscroll_box">
+
+				<div class="nav_content_box">
+
+					<div class="nav_banner">
+						<div class="nav_login">
+							<ul>
+								<!--{ ? gd_is_login() === false }-->
+								<li><a href="../member/login.php">{=__('로그인')}</a></li>
+								<li><a href="../member/join_method.php">{=__('회원가입')}</a></li>
+								<!--{ : }-->
+								<li><a href="../member/logout.php">{=__('로그아웃')}</a></li>
+								<li><a href="../mypage/index.php">{=__('마이페이지')}</a></li>
+								<!--{ / }-->
+							</ul>
+						</div>
+					</div>
+					<!-- //nav_banner -->
+
+					<div class="nav_link">
+						<ul>
+							<li><a href="../mypage/index.php">{=__('마이페이지')}</a></li>
+							<li><a href="../mypage/order_list.php">주문배송</a></li>
+							<li><a href="../order/cart.php">{=__('장바구니')}</a></li>
+							<li><a href="../mypage/wish_list.php">{=__('찜리스트')}</a></li>
+						</ul>
+					</div>
+					<!-- //nav_link -->
+
+					<!-- <div class="family_link">
+						<ul>
+							<li><a href="/service/story.php">로뎀푸드<span>Stroy</span></a></li>
+							<li><a href="/service/foundation_guide.php">창업안내</a></li>
+						</ul>
+					</div> -->
+					<!-- //family_link -->
+
+					<div class="nav_etc_box">
+						<ul class="category_side">
+							<li><a href="#">로뎀푸드<span class="gray">Story</span><span class="icon_plus">ICON</span></a>
+							<ul>
+								<li><a href="/main/html.php?htmid=service/company_greeting.html">인사말</a></li>
+								<li><a href="/main/html.php?htmid=service/company_history.html">연혁</a></li>
+								<li><a href="/main/html.php?htmid=service/brand.html">브랜드 소개</a></li>
+								<li><a href="/main/html.php?htmid=service/company_certificate.html">인증서</a></li>
+								<li><a href="/main/html.php?htmid=service/company_haccp.html">HACCP</a></li>
+								<li><a href="/board/list.php?&bdId=promote">영상홍보실</a></li>
+								<li><a href="/main/html.php?htmid=service/company_media.html">언론홍보</a></li>
+								<li><a href="/main/html.php?htmid=service/company_map.html">사옥 둘러보기</a></li>
+								<li><a href="/main/html.php?htmid=service/company_donation.html">사회공헌활동(CSR)</a></li>
+							</ul>
+							</li>
+							<li><a href="#">취급안내<span class="icon_plus">ICON</span></a>
+							<ul>
+								<li><a href="/main/html.php?htmid=service/business_place.html">창업현장</a></li>
+								<li><a href="/main/html.php?htmid=service/business_coffee.html">카페제품</a></li>
+								<li><a href="/main/html.php?htmid=service/business_chalba.html">오감찰바</a></li>
+								<li><a href="/main/html.php?htmid=service/business_hodduck.html">길쭉이호떡</a></li>
+								<li><a href="/main/html.php?htmid=service/business_shopinshop.html">Shop in Shop</a></li>
+								<li><a href="/main/html.php?htmid=service/business_seoul.html">마트전용 서울마님죽</a></li>
+								<li><a href="/main/html.php?htmid=service/business_school.html">알찬빙수팥</a></li>
+							</ul>
+							</li>
+						</ul>
+					</div>
+
+					<div class="nav_category_box">
+						<p class="cate_tit">카테고리</p>
+						{=includeWidget("proc/category_all.html",'cateType','category')}
+					</div>
+					<!-- //nav_category_box -->
+
+					<div class="nav_community_box">
+						<p class="comm_tit">고객센터</p>
+						<ul class="board_cate">
+							<li><a href="../service/notice.php">공지사항</a></li>
+							<li><a href="../service/faq_list.php">자주하는 질문</a></li>
+							<li><a href="../service/qa.php">1:1문의</a></li>
+							<li><a href="../board/list.php?bdId=event">이벤트/혜택</a></li>
+							<li><a href="/board/plus_review_article.php">구매후기</a></li>
+							<li><a href="../board/list.php?bdId=recipe">레시피</a></li>
+							<!-- { @defaultBoardList }
+							<li><a href="../board/list.php?bdId={.key_}">{=__(.value_)}</a></li>
+							{/}
+							<li><a href="../service/faq_list.php">{=__('FAQ')}</a></li> -->
+						</ul>
+					</div>
+					<!-- nav_community_box -->
+					<div class="ft_info_box">
+						<div>
+							<h3>CUSTOMER CENTER</h3>
+							<p class="call">{=gMall.centerPhone}</p>
+							<ul>
+								<li>상담시간  :  오전 10시~오후 6시</li>
+								<li>점심시간  :  오후 12시~오후 1시</li>
+								<li>주말 및 공휴일 : 휴무</li>
+							</ul>
+						</div>
+						<div>
+							<h3>BANK INFO</h3>
+							<ul>
+								<li>우리은행 : 1005-301-319745</li>
+								<li>NH농협 : 355-0031-1796-03</li>
+								<li>하나은행 : 371-910004-49704</li>
+								<li>국민은행 : 440201-01-360243</li>
+								<li>예금주 : (주)로뎀푸드</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<!-- //nav_content_box -->
+
+			</div>
+			<!-- //nav_iscroll_box -->
+		</div>
+		<!-- //nav_box -->
+	</div>
+	<!-- //nav_bg_box -->
+</nav>
+{=includeWidget('proc/_timesale', 'type', 'timer')}
+
+<div id="container">
+	<div id="contents_wrap">

@@ -1,0 +1,33 @@
+{*** [위젯] 메인 상품 타임세일 출력 | goods/_goods_display_timesale.php ***}
+
+<!--{ @ goodsViewList }-->
+<!--{? .index_ < 2 }--> <!-- 2개까지만 -->
+<li>
+    <div class="unit">
+        <div class="img">
+            <a href="{=.goodsUrl}" target="_self">
+                <!-- <img src="../img/time/pc_ts_tbi.jpg" alt=""> -->
+                <!-- <img src="{=.goodsImageSrc}" alt=""> -->
+                {=.goodsImage}
+                <p class="layer">
+                    <b>-{=gd_money_format(100 - ((.goodsPrice / .oriGoodsPrice) * 100)) }%</b>
+                </p>
+                <p class="cart-btn-wrp">
+                    <!-- <a href="" class="cart-btn"><img src="../img/icon/goods_icon/icon_basket_cart.png" alt=""></a> -->
+                    <input type="button" value="{=__('장바구니')}" data-key="optionViewLayer" data-type="directCart" class="js_option_layer related_cart_btn btn_basket_cart" data-goodsno="{.goodsNo}">
+                </p>
+            </a>
+        </div>
+        <div class="info">
+            <p class="nm">
+                {=.goodsNm}
+            </p>
+            <p class="price">
+                <span class="dcprice">{=number_format(.goodsPrice)}원</span>
+                <span class="rprice">{=number_format(.oriGoodsPrice)}원</span>
+            </p>
+        </div>
+    </div>
+</li>
+<!--{ / }-->
+<!--{ / }-->

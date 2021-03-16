@@ -1,0 +1,166 @@
+{*** 타임세일 | event/time_sale.php ***}
+{ # header }
+<link rel="stylesheet" type="text/css" href="../css/event/time_sale.css">
+<div class="time_sale">
+    <div class="tit_term">
+        <h3>{timeSaleInfo.timeSaleTitle}</h3>
+        <strong>{=__('기간')} : {timeSaleInfo.startDt} ~ {timeSaleInfo.endDt}</strong>
+    </div>
+    <!--{? strlen(str_replace('<p>&nbsp;</p>', '', timeSaleInfo.mobileDescription)) != 0}-->
+    <div class="ctt">
+        {=timeSaleInfo.mobileDescription}
+    </div>
+    <!--{ / }-->
+	<div class="time_sale_box">
+		<div class="event">
+			<div class="time_count" id="displayTimeSale">
+				<p class="c_time">{=__('남은시간')}</p>
+				<div class="time_sale_date_box">
+				<span class="time_sale_icon"><img src="../img/icon/icon_timesale.png" alt="{=__('타임세일아이콘')}"></span>
+					<div id="timSaleDate" class="timesaledate">
+						<span id="timeViewDay" class="time_day"></span>
+						<span class="time_day_view_tail"></span>
+						<span id="timeViewTime" class="time_box">
+							<strong class="time"></strong>
+							<strong class="time"></strong>
+							<span>:</span>
+							<strong class="time"></strong>
+							<strong class="time"></strong>
+							<span>:</span>
+							<strong class="time"></strong>
+							<strong class="time"></strong>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+	<div class="goods_list_content">
+		<div class="goods_top_box">
+			<div class="goods_arr_box">
+				<div class="goods_sort">
+					<div class="inp_sel">
+						<select name="goods_sort" onchange="gd_get_list(1,true);">
+							<option value="">{=__('상품정렬')}</option>
+							<option value="g.regDt desc">{=__('등록순')}</option>
+							<option value="goodsPrice asc,g.regDt desc">{=__('낮은가격순')}</option>
+							<option value="goodsPrice desc,g.regDt desc">{=__('높은가격순')}</option>
+						</select>
+					</div>
+				</div>
+				<div class="goods_view_type">
+					<input type="hidden" name="displayType" value="{themeInfo.displayType}" >
+					<ul>
+						<li><button class="<!--{ ? themeInfo.displayType =='02' }-->on<!--{ / }-->" data-key="02" >list</button></li>
+						<li><button class="<!--{ ? themeInfo.displayType =='09' }-->on<!--{ / }-->" data-key="09">gallery_type1</button></li>
+						<li><button class="<!--{ ? themeInfo.displayType =='01' }-->on<!--{ / }-->" data-key="01">gallery_type2</button></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="goods_list_box">
+			<ul class="goods_product_list"></ul>
+		</div>
+	</div>
+</div>
+{ # footer }
+
+
+
+<script type="text/javascript">
+    <!--
+    $(document).ready(function(){
+
+        $("#displayTimeSale").hide();
+        gd_dailyMissionTimer('{=timeSaleDuration}');
+
+        gd_get_list();
+
+        $('.goods_view_type ul li').on('click', function(e){
+            $(".goods_view_type ul li button").removeClass('on');
+            $('input[name="displayType"]').val($(this).find('button').data('key'));
+            $(this).find('button').addClass('on');
+            gd_get_list();
+        });
+
+        <!--{ ? themeInfo.displayType == '11' }-->
+        $('body').on('click', '.js_option_layer', function(e){
+            var params = {
+                type : $(this).data('type'),
+                sno: $(this).data('sno'),
+                goodsNo: $(this).data('goodsno')
+            };
+
+            $('#popupOption').modal({
+                remote: '../goods/layer_option.php',
+                cache: false,
+                params: params,
+                type : 'POST',
+                show: true
+            });
+        });
+        <!--{ / }-->
+    });
+	
+
+    function gd_get_list() {
+        var displayType = $('input[name="displayType"]').val();
+        var sort = $('select[name="goods_sort"]').val();
+
+        $.post('./time_sale_ps.php', {'mode' : 'get_time_sale_list', 'displayType' : displayType, 'sno' : '{timeSaleSno}','sort' : sort}, function (data) {
+            $(".goods_product_list").html(data);
+        });
+    }
+
+    /**
+     * 시간간격 카운트
+     * @returns {String}
+     */
+    function gd_dailyMissionTimer(duration) {
+
+        var timer = duration;
+        var days,hours, minutes, seconds;
+
+        var interval = setInterval(function(){
+            days	= parseInt(timer / 86400, 10);
+            hours	= parseInt(((timer % 86400 ) / 3600), 10);
+            minutes = parseInt(((timer % 3600 ) / 60), 10);
+            seconds = parseInt(timer % 60, 10);
+
+            if(days <= 0) {
+                $('.time_day_view').hide();
+            } else {
+
+                $('#timeViewDay').html("");
+
+                days 	= days < 10 ? "0" + days : days;
+                for(i = 0; i < days.toString().length; i++) {
+                    $('#timeViewDay').append("<strong class='time_day_view'>"+days.toString().substr(i,1)+"</strong>");
+                }
+                $('.time_day_view_tail').text("{=__('일')}");
+            }
+
+            hours 	= hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            $('#timeViewTime strong').eq(0).text(hours.toString().substr(0,1));
+            $('#timeViewTime strong').eq(1).text(hours.toString().substr(1,1));
+
+            $('#timeViewTime strong').eq(2).text(minutes.toString().substr(0,1));
+            $('#timeViewTime strong').eq(3).text(minutes.toString().substr(1,1));
+
+            $('#timeViewTime strong').eq(4).text(seconds.toString().substr(0,1));
+            $('#timeViewTime strong').eq(5).text(seconds.toString().substr(1,1));
+
+            $("#displayTimeSale").show();
+
+            if (--timer < 0) {
+                timer = 0;
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+
+    //-->
+</script>

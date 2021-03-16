@@ -1,0 +1,150 @@
+{*** 쇼핑몰 메인본문 | main/index.php ***}
+{ # header }
+<div class="main">
+	<div class="slider-wrap">
+		{=includeWidget('proc/_slider_banner.html', 'bannerCode', '3606671697')}
+	</div>
+	<div class="top_cat">
+		<ul>
+			<li><a href="/goods/goods_list.php?cateCd=006">베스트상품</a></li>
+			<li><a href="/goods/goods_list.php?cateCd=011">할인상품</a></li>
+			<li><a href="/goods/goods_list.php?cateCd=005">세트상품</a></li>
+			<li><a href="/board/list.php?bdId=event">이벤트/혜택</a></li>
+			<li><a href="/board/plus_review_article.php">구매후기</a></li>
+		</ul>
+	</div>
+	<div class="main_evt_benefit">
+		<div class="goods_list_tit">
+			<h3><span>이벤트/혜택</span></h3>
+		</div>
+		{=includeWidget('board/board_article', 'bdId', 'event', 'listCount', 9, 'strCut', 27)}
+	</div>
+	<!-- 타임세일 메인 20200625 start -->
+		<div class="ma_evt_bx dev_timesale_main dn">
+			<div class="ma_evt_left_con">
+				<div class="ma_evt_tmtxt">
+					<p class="time_tit"><span class="time_font">타임</span><i class="ts_icon"></i><span class="sale_font">특가</span></p>
+					<div class="ts_numbers">
+						<span class="dev_timesale_day">
+							<span class="numcon numcon0"><b>0</b></span>
+							<span class="numcon numcon0"><b>0</b></span>
+							<span class="numtxt numtxt1"><b>일</b></span>
+						</span>
+						<span class="numcon numcon3"><b>0</b></span>
+						<span class="numcon numcon4"><b>0</b></span>
+						<span class="numtxt numtxt2"><b>:</b></span>
+						<span class="numcon numcon5"><b>0</b></span>
+						<span class="numcon numcon6"><b>0</b></span>
+						<span class="numtxt numtxt3"><b>:</b></span>
+						<span class="numcon numcon7"><b>0</b></span>
+						<span class="numcon numcon8"><b>0</b></span>
+					</div>
+				</div>
+				<div class="ma_evt_bx_btm">
+					<ul class="ma_evt_pdt_list dev_timesale_on">
+						{=includeWidget('proc/_timesale.html', 'type', 'list')}<!-- goods/_goods_display_timesale.php -->
+					</ul>
+					<div class="dev_timesale_off dn">
+						타임세일이 종료되었습니다.
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- 타임세일 메인 20200625 end -->
+	<div class="main_best_prd">
+		<div class="goods_list_tit">
+			<h3><span>베스트 상품</span></h3>
+		</div>
+		{=includeWidget('goods/_goods_display_main.html', 'sno', '4')}
+	</div>
+<div class="goods_list">
+		<div class="goods_list_tit">
+			<h3><span>죽&스프</span></h3>
+		</div>
+		{=includeWidget('goods/_goods_display_main.html','sno','5')}
+	</div>
+<div class="goods_list">
+		<div class="goods_list_tit">
+			<h3><span>찰바&마리</span></h3>
+		</div>
+		{=includeWidget('goods/_goods_display_main.html','sno','6')}
+	</div>
+
+<!-- 떡볶이&잡채-->
+
+	<div class="goods_list">
+		<div class="goods_list_tit">
+			<h3><span>빙수&떡</span></h3>
+		</div>
+		{=includeWidget('goods/_goods_display_main.html','sno','12')}
+	</div>
+<div class="main_banner-box1">
+		<!--{ @dataBanner('2505697183') }-->{.tag}<!--{ / }-->
+	</div>
+<div class="main_review">
+		<div class="goods_list_tit">
+			<h3>로뎀푸드 구매후기</h3>
+		</div>
+		{=includeWidget('board/plus_review_photo', 'cols', '10', 'rows', 1, 'thumWidth', '200', 'thumHeight', '200')}
+	</div>
+	<!--
+<div class="main_insta">
+		<div class="goods_list">
+			<div class="goods_list_tit">
+				<h3><img src="/data/skin/mobile/kaimen_rodemfood1_mo/img/banner/insta-logo.png" alt=""><span>@로뎀푸드</span></h3>
+			</div>
+		</div>
+		{=includeWidget('proc/_insgo.html', 'sno', '2')}
+	</div> -->
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('body').on('click', '.js_option_layer', function(e){
+			var params = {
+				type : $(this).data('type'),
+				sno: $(this).data('sno'),
+				goodsNo: $(this).data('goodsno')
+			};
+
+			$('#popupOption').modal({
+				remote: '../goods/layer_option.php',
+				cache: false,
+				params: params,
+				type : 'POST',
+				show: true
+			});
+		});
+		/*
+		$('.btn_basket_cart').on('click', function(){
+			var params = "mode=cartIn&cartMode=&optionSno%5B%5D=&goodsCnt%5B%5D=1&goodsNo%5B%5D=" + $(this).data('goodsno');
+			console.log(params);
+			// mode cartIn goodsCnt[] 1 goodsNo[] 1000000010
+			$.ajax({
+					method: "POST",
+					cache: false,
+					url: "../order/cart_ps.php",
+					data: params,
+					success: function (data) {
+						console.log('message ' + data.message);
+						if(data.error != '0') {
+							// alert("error " + data.error);
+							// alert(data.message);
+							// if(data.cartCnt == 'undefined') {
+							// 	alert(data.cartCnt);
+							// }
+						} else {
+							$("#gnbCartCnt").html(parseInt(data.cartCnt));
+						}
+					},
+					error: function (data) {
+							alert(1111);
+							alert(data.message);
+					}
+			});
+		});
+		*/
+	});
+</script>
+</div>
+{ # footer }

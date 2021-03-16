@@ -1,0 +1,143 @@
+{*** [위젯] 메인 상품 출력 | goods/_goods_display_main.php ***}
+
+<!--{ ? mainData.sno == '4'   }-->
+{ #goodsTemplate }
+<!--{ : mainData.sno == '5' || mainData.sno == '6'  || mainData.sno == '11'  || mainData.sno == '12'  || mainData.sno == '14'}-->
+	<div class="js_main_wrap_{mainData.sno}_{mainData.groupSno} goods_list_cont">
+		<ul class="main_prd_list goods_content{mainData.sno}g{mainData.groupSno}">
+			{ #goodsTemplate }
+		</ul>
+		<!--{ ? totalPage > 1 && mainData.moreBottomFl == 'y' && themeInfo.displayType !='04' && themeInfo.displayType !='06' && themeInfo.displayType !='07'  && mainData.sno !='14' }-->
+		<div class="btn_view_more">
+			<button type="button" class="main_more_btn btn_main_bottom_more" data-page="2">{=__('더보기')} </button>
+		</div>
+		<!--{ / }-->
+	</div>
+<!--{:}-->
+	<!--{ ? mainData.displayFl == 'y'}-->
+	<div class="_goods_display_main">
+		<!--{ ? (mainData.kind == 'event' && mainData.displayCategory == 'g' && firstGroup == 'y')}-->
+		<div class="item_display_wrap">
+			<!--{ ? mainData.eventThemeName }-->
+			<h3>{=__(mainData.eventThemeName)}</h3>
+			<!--{ / }-->
+
+			<!--{ ? mainData.eventThemeMobileContents}-->
+			<div class="contents">
+				{=mainData.eventThemeMobileContents}
+			</div>
+			<!--{/}-->
+			<!--{ ? mainData.otherEventData }-->
+			<div class="inp_sel">
+				<select name="otherEventData" onchange="javascript:location.href='/goods/event_sale.php?sno=' + this.value;">
+					<!--{ @ mainData.otherEventData }-->
+					<option value="{.value_['sno']}">{.value_['themeNm']}</option>
+					<!--{/}-->
+				</select>
+			</div>
+			<!--{/}-->
+		</div>
+		<!--{/}-->
+		<div class="js_main_wrap_{mainData.sno}_{mainData.groupSno}">
+			<!--{ ? mainData.themeNm }-->
+				<h3>{=__(mainData.themeNm)}
+					<!--{ ? mainData.moreTopFl == 'y'}-->
+						<div class="more_btn_box">
+							<!--{ ? mainData.displayCategory == 'g'}-->
+							<a class="main_more_btn2" href="../goods/goods_main.php?sno={mainData.sno}&groupSno={mainData.groupSno}">{=__('더보기')}</a>
+							<!--{ : }-->
+							<a class="main_more_btn2" href="../goods/goods_main.php?sno={mainData.sno}">{=__('더보기')}</a>
+							<!--{ / }-->
+						</div>
+					<!--{ / }-->
+				</h3>
+			<!--{ / }-->
+			<!--{ ? mainData.mobileContents}-->
+			<div class="contents">
+				{=mainData.mobileContents}
+			</div>
+			<!--{ / }-->
+			<ul class="main_prd_list goods_content{mainData.sno}g{mainData.groupSno}">
+				{ #goodsTemplate }
+			</ul>
+			<!--{ ? totalPage > 1 && mainData.moreBottomFl == 'y' && themeInfo.displayType !='04' && themeInfo.displayType !='06' && themeInfo.displayType !='07' }-->
+			<div class="btn_box">
+				<button type="button" class="main_more_btn btn_main_bottom_more" data-page="2">{=__('더보기')} </button>
+			</div>
+			<!--{ / }-->
+		</div>
+	</div>	
+	<!--{ / }-->
+<!--{/}-->
+<script type="text/javascript">
+<!--
+var keyValue{mainData.sno}g{mainData.groupSno}{loginFl} = '{gGlobal.locale + mainData.sno}' + 'G{mainData.groupSno}{loginFl}';
+var key{mainData.sno}g{mainData.groupSno}{loginFl} = {
+	html: 'html' + keyValue{mainData.sno}g{mainData.groupSno}{loginFl},
+	page: 'page' + keyValue{mainData.sno}g{mainData.groupSno}{loginFl}
+};
+var gdStorage{mainData.sno}g{mainData.groupSno}{loginFl} = gd_load_session(key{mainData.sno}g{mainData.groupSno}{loginFl}.html);
+var page{mainData.sno}g{mainData.groupSno}{loginFl} = gd_load_session(key{mainData.sno}g{mainData.groupSno}{loginFl}.page);
+
+$(document).ready(function(){
+	var totalPage = '{totalPage}';
+	if (gdStorage{mainData.sno}g{mainData.groupSno}{loginFl}) {
+		$('.goods_content{mainData.sno}g{mainData.groupSno}').html(gdStorage{mainData.sno}g{mainData.groupSno}{loginFl});
+		if (page{mainData.sno}g{mainData.groupSno}{loginFl}) {
+			$('.js_main_wrap_{mainData.sno}_{mainData.groupSno} .btn_main_bottom_more').attr('data-page',page{mainData.sno}g{mainData.groupSno}{loginFl});
+		}
+	}
+
+	$('.js_main_wrap_{mainData.sno}_{mainData.groupSno} .btn_main_bottom_more').on('click', function(e){
+		gd_get_list{mainData.sno}g{mainData.groupSno}{loginFl}($(this).data('page'));
+	});
+
+	if (totalPage == page{mainData.sno}g{mainData.groupSno}{loginFl}) {
+		$('.js_main_wrap_{mainData.sno}_{mainData.groupSno} .btn_main_bottom_more').closest('.btn_view_more').addClass('dn');
+	}
+
+	$(document).off().on('click','.btn_alert_login',function (e){
+		alert("{=__('로그인하셔야 본 서비스를 이용하실 수 있습니다.')}");
+		document.location.href = "../member/login.php";
+		return false;
+	});
+
+	<!--{ ? themeInfo.displayType == '11' }-->
+	$('body').on('click', '.goods_content{mainData.sno}g{mainData.groupSno} .js_option_layer', function(e){
+		var params = {
+			type : $(this).data('type'),
+			sno: $(this).data('sno'),
+			goodsNo: $(this).data('goodsno'),
+			mainSno : '{mainData.sno}',
+		};
+
+		$('#popupOption').modal({
+			remote: '../goods/layer_option.php',
+			cache: false,
+			params: params,
+			type : 'POST',
+			show: true
+		});
+	});
+	<!--{ / }-->
+
+});
+
+
+function gd_get_list{mainData.sno}g{mainData.groupSno}{loginFl}(page){
+	$.post('../goods/goods_ps.php', {'mode' : 'get_main', 'more' : page, 'mainSno' : '{mainData.sno}', 'groupSno' : '{mainData.groupSno}'}, function (data) {
+
+		$(".goods_content{mainData.sno}g{mainData.groupSno}").html(data);
+		gd_save_session(key{mainData.sno}g{mainData.groupSno}{loginFl}.html, data);
+		if(parseInt(page)+1 > {totalPage}) {
+			$('.js_main_wrap_{mainData.sno}_{mainData.groupSno} .btn_main_bottom_more').hide();
+			gd_save_session(key{mainData.sno}g{mainData.groupSno}{loginFl}.page, parseInt(page));
+		} else {
+			$('.js_main_wrap_{mainData.sno}_{mainData.groupSno} .btn_main_bottom_more').data('page',parseInt(page)+1);
+			gd_save_session(key{mainData.sno}g{mainData.groupSno}{loginFl}.page, parseInt(page)+1);
+		}
+	});
+}
+
+//-->
+</script>
